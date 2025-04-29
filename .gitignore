@@ -1,0 +1,54 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+bin/
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Temp files
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Build output
+dist/
+build/
+out/
+*.jar
+*.war
+*.ear
+
+# Local configuration files
+*.properties
+*.cfg
+*.conf
+
+# Node.js (如果项目中有前端部分)
+node_modules/
+npm-debug.log
