@@ -231,14 +231,25 @@ public class RealTimeASRClient implements AutoCloseable {
 
         @Override
         public void onFailure(WebSocket webSocket, Throwable t, Response response) {
-            String responseInfo = response != null ? ", Response Log ID: " + response.header("X-Tt-Logid") : "";
-            System.err.println("Volcano Engine WebSocket Failure: " + t.getMessage() + responseInfo);
-            t.printStackTrace(System.err);
-            isVolcanoEngineConnectionOpen = false;
-            if (listener != null) {
-                listener.onError(-1, "Volcano Engine connection failure: " + t.getMessage());
+            isVolcanoEngineConnectionOpen = false; // Mark connection as closed regardless
+
+            // Check if the failure is an EOFException, which might be expected after stream end
+            if (t instanceof java.io.EOFException) {
+                System.out.println("Volcano Engine WebSocket closed (potentially normal EOF after stream end).");
+                // Don't treat EOF as a critical error needing propagation if stream end was signaled
+                if (listener != null) {
+                    listener.onError(-1, "Volcano Engine connection closed (EOF).");
+                }
+            } else {
+                // Handle other types of failures as errors
+                String responseInfo = response != null ? ", Response Log ID: " + response.header("X-Tt-Logid") : "";
+                System.err.println("Volcano Engine WebSocket Failure: " + t.getMessage() + responseInfo);
+                t.printStackTrace(System.err);
+                if (listener != null) {
+                    listener.onError(-1, "Volcano Engine connection failure: " + (t.getMessage() != null ? t.getMessage() : t.getClass().getSimpleName()));
+                }
             }
-            // Don't auto-close here, let the wrapper handle retries or closure.
+            // Don't auto-close here, let the wrapper handle retries or closure based on state.
         }
     }
 
