@@ -70,3 +70,11 @@ asr.audio.channels=1
 - 当前仅支持16kHz、16bit、单声道的PCM音频格式
 - 浏览器测试时，录制的音频会自动转换为适合的格式
 - 生产环境中应限制WebSocket连接的来源
+
+## 运行脚本
+启动服务端
+mvn exec:java -Dexec.mainClass="com.example.asrwebsocket.handler.YourWebSocketServer"
+启动录音测试客户端
+mvn exec:java -Dexec.mainClass="com.example.asrwebsocket.handler.TestWebSocketClient"
+启动麦克风测试客户端
+mvn exec:java -Dexec.mainClass="com.example.asrwebsocket.handler.MicrophoneWebSocketClient"
