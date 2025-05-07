@@ -16,8 +16,8 @@ public class YourWebSocketServer extends WebSocketServer {
     private static final int SERVER_PORT = 8887; // Port your clients will connect to
 
      // --- Volcano Engine Credentials (Move to secure config later) ---
-     private static final String APP_ID = "3467491207"; // Replace
-     private static final String TOKEN = "kPHQMVliZeyYh2fWkiOC-e9eXIeZhCN8"; // Replace
+     private static final String APP_ID = "your_app_id"; // Replace
+     private static final String TOKEN = "your_token"; // Replace
 
      // --- Default Audio Config (Client might send this info later) ---
      // IMPORTANT: Ensure this matches the audio the client sends!
